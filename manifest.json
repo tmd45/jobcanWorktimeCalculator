@@ -12,7 +12,7 @@
 
   "browser_action": {
     "default_title": "Jobcan Calc",
-		"default_popup": "popup.html"
+    "default_popup": "popup.html"
   },
 
   "background": {

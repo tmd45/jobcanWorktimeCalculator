@@ -3,18 +3,18 @@
  * ft. https://github.com/hanocha/how-many-work-time/blob/master/app/models/work_time_info.rb
  */
 var stdWorkDays,
-		stdWorkHours,
-		workedDays,
-		workedHours,
-		salariedDays,
-		remainWorkDays,
-		excessWorkTimes,
-		workTimeMargin,
-		requiredWorkTimes,
-		lastUpdatedAt;
+  stdWorkHours,
+  workedDays,
+  workedHours,
+  salariedDays,
+  remainWorkDays,
+  excessWorkTimes,
+  workTimeMargin,
+  requiredWorkTimes,
+  lastUpdatedAt;
 
 var infotplRow = document.getElementsByClassName('infotpl')[0].getElementsByTagName('tr'),
-		rowLength = infotplRow.length;
+  rowLength = infotplRow.length;
 
 // 所定労働日数
 stdWorkDays = ~~infotplRow[4].getElementsByTagName('td')[0].innerText.split(' ')[0];
@@ -26,8 +26,8 @@ workedDays = ~~infotplRow[6].getElementsByTagName('td')[0].innerText;
 
 // 実労働時間
 var tmpWorked = infotplRow[13].getElementsByTagName('td')[0].innerText,
-		tmpWorkedHours = ~~tmpWorked.split(':')[0],
-		tmpWorkedMinutes = ~~tmpWorked.split(':')[1];
+  tmpWorkedHours = ~~tmpWorked.split(':')[0],
+  tmpWorkedMinutes = ~~tmpWorked.split(':')[1];
 workedHours = tmpWorkedHours + (tmpWorkedMinutes / 60);
 
 // 有給休暇消化日数
@@ -35,26 +35,26 @@ var tmpSalariedDays = 0, tmpSalariedHarfDaysAm = 0, tmpSalariedHarfDaysPm = 0;
 var thText;
 // 後ろから３カラム分のデータ（があるかもしれない）
 for (i = 1; i < 4; i++) {
-	// ht の無いカラムは無いはずだが念のため
-	if (infotplRow[rowLength-i].getElementsByTagName('th')) {
-		thText = infotplRow[rowLength-i].getElementsByTagName('th')[0].innerText;
-	} else {
-		thText = null;
-	}
+  // ht の無いカラムは無いはずだが念のため
+  if (infotplRow[rowLength-i].getElementsByTagName('th')) {
+    thText = infotplRow[rowLength-i].getElementsByTagName('th')[0].innerText;
+  } else {
+    thText = null;
+  }
   // th の値によって判断する
-	switch (thText) {
-	case '有休(全休)':
-		tmpSalariedDays = ~~infotplRow[rowLength-i].getElementsByTagName('td')[0].innerText;
-		break;
-	case '有休(AM休)':
-		tmpSalariedHarfDaysAm = ~~infotplRow[rowLength-i].getElementsByTagName('td')[0].innerText;
-		break;
-	case '有休(PM休)':
-		tmpSalariedHarfDaysPm = ~~infotplRow[rowLength-i].getElementsByTagName('td')[0].innerText;
-		break;
-	default:
-		break;
-	}
+  switch (thText) {
+    case '有休(全休)':
+      tmpSalariedDays = ~~infotplRow[rowLength-i].getElementsByTagName('td')[0].innerText;
+      break;
+    case '有休(AM休)':
+      tmpSalariedHarfDaysAm = ~~infotplRow[rowLength-i].getElementsByTagName('td')[0].innerText;
+      break;
+    case '有休(PM休)':
+      tmpSalariedHarfDaysPm = ~~infotplRow[rowLength-i].getElementsByTagName('td')[0].innerText;
+      break;
+    default:
+      break;
+  }
 }
 salariedDays = tmpSalariedDays + tmpSalariedHarfDaysAm + tmpSalariedHarfDaysPm;
 
@@ -73,28 +73,28 @@ workTimeMargin = excessWorkTimes - (stdWorkHours - (remainWorkDays * 8));
 // 1日あたり何時間働けばいいか
 // 所定労働時間から実質労働時間を引いた値を残りの出勤可能日数で割ったもの
 requiredWorkTimes = (function() {
-	var shortTime = stdWorkHours - excessWorkTimes;
-	if (remainWorkDays == 0) {
-		return shortTime;
-	}
-	return (stdWorkHours - excessWorkTimes) / remainWorkDays;
+  var shortTime = stdWorkHours - excessWorkTimes;
+  if (remainWorkDays == 0) {
+    return shortTime;
+  }
+  return (stdWorkHours - excessWorkTimes) / remainWorkDays;
 })();
 
 lastUpdatedAt = Date.now();
 
 // DEBUG
 console.log(
-	"worktime.js",
-	stdWorkDays,
-	stdWorkHours,
-	workedDays,
-	workedHours,
-	salariedDays,
-	remainWorkDays,
-	excessWorkTimes,
-	workTimeMargin,
-	requiredWorkTimes,
-	lastUpdatedAt
+  "worktime.js",
+  stdWorkDays,
+  stdWorkHours,
+  workedDays,
+  workedHours,
+  salariedDays,
+  remainWorkDays,
+  excessWorkTimes,
+  workTimeMargin,
+  requiredWorkTimes,
+  lastUpdatedAt
 );
 
 /* localStorage は content_scripts と popup でコンテキストが別になるため使えない。
@@ -113,16 +113,16 @@ console.log("worktime.js save localStorage.");
 */
 
 var jobcanWorktimes = {
-	stdWorkDays: stdWorkDays,
-	stdWorkHours: stdWorkHours,
-	workedDays: workedDays,
-	workedHours: workedHours,
-	salariedDays: salariedDays,
-	remainWorkDays: remainWorkDays,
-	excessWorkTimes: excessWorkTimes,
-	workTimeMargin: workTimeMargin,
-	requiredWorkTimes: requiredWorkTimes,
-	lastUpdatedAt: lastUpdatedAt
+  stdWorkDays: stdWorkDays,
+  stdWorkHours: stdWorkHours,
+  workedDays: workedDays,
+  workedHours: workedHours,
+  salariedDays: salariedDays,
+  remainWorkDays: remainWorkDays,
+  excessWorkTimes: excessWorkTimes,
+  workTimeMargin: workTimeMargin,
+  requiredWorkTimes: requiredWorkTimes,
+  lastUpdatedAt: lastUpdatedAt
 }
 chrome.storage.sync.set(jobcanWorktimes, function(){});
 
