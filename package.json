@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "react": "^15.6.0",
-    "react-dom": "^15.6.0"
+    "react-dom": "^15.6.0",
+    "styled-components": "^2.0.1"
   }
 }
