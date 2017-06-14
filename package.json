@@ -16,5 +16,9 @@
     "source-map-loader": "^0.2.1",
     "typescript": "^2.3.4",
     "webpack": "^2.6.1"
+  },
+  "dependencies": {
+    "react": "^15.6.0",
+    "react-dom": "^15.6.0"
   }
 }
