@@ -44,13 +44,13 @@ for (i = 1; i < 4; i++) {
   // th の値によって判断する
   switch (thText) {
     case '有休(全休)':
-      tmpSalariedDays = ~~infotplRow[rowLength-i].getElementsByTagName('td')[0].innerText;
+      tmpSalariedDays = infotplRow[rowLength-i].getElementsByTagName('td')[0].innerText * 1;
       break;
     case '有休(AM休)':
-      tmpSalariedHarfDaysAm = ~~infotplRow[rowLength-i].getElementsByTagName('td')[0].innerText;
+      tmpSalariedHarfDaysAm = infotplRow[rowLength-i].getElementsByTagName('td')[0].innerText * 1;
       break;
     case '有休(PM休)':
-      tmpSalariedHarfDaysPm = ~~infotplRow[rowLength-i].getElementsByTagName('td')[0].innerText;
+      tmpSalariedHarfDaysPm = infotplRow[rowLength-i].getElementsByTagName('td')[0].innerText * 1;
       break;
     default:
       break;
