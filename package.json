@@ -18,8 +18,10 @@
     "webpack": "^2.6.1"
   },
   "dependencies": {
+    "material-ui": "^0.18.3",
     "react": "^15.6.0",
     "react-dom": "^15.6.0",
+    "react-tap-event-plugin": "^2.0.1",
     "styled-components": "^2.0.1"
   }
 }
