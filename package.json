@@ -4,7 +4,7 @@
   "description": "",
   "license": "ISC",
   "scripts": {
-    "build": "tsc -p ./",
+    "build": "webpack",
     "prettier": "prettier"
   },
   "devDependencies": {
