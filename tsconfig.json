@@ -6,6 +6,7 @@
     "jsx": "react",
     "outDir": "dist/js",
     "rootDir": "src",
+    "sourceMap": true,
     "removeComments": true,
     "downlevelIteration": true,
     "strict": true,
