@@ -1,18 +1,21 @@
 import * as React from "react";
+import styled from "styled-components";
 
+import Header from "./Header";
 import Notification from "./Notification";
 import DefinitionList from "./DefinitionList";
 
-export interface HelloProps {
-  compiler: string;
-  framework: string;
-}
+const ContentContainer = styled.div`
+  padding: 10px 10px;
+`;
 
 const MainPage = () =>
   <div>
-    <h3>Calculate Working Time</h3>
-    <Notification />
-    <DefinitionList />
+    <Header />
+    <ContentContainer>
+      <Notification />
+      <DefinitionList />
+    </ContentContainer>
   </div>;
 
 export default MainPage;
