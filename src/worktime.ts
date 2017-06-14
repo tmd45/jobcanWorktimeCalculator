@@ -13,44 +13,56 @@ var stdWorkDays,
   requiredWorkTimes,
   lastUpdatedAt;
 
-var infotplRow = document.getElementsByClassName('infotpl')[0].getElementsByTagName('tr'),
+var infotplRow = document
+  .getElementsByClassName("infotpl")[0]
+  .getElementsByTagName("tr"),
   rowLength = infotplRow.length;
 
 // 所定労働日数
-stdWorkDays = ~~infotplRow[4].getElementsByTagName('td')[0].innerText.split(' ')[0];
+stdWorkDays = ~~infotplRow[4]
+  .getElementsByTagName("td")[0]
+  .innerText.split(" ")[0];
 // 所定労働時間
 stdWorkHours = stdWorkDays * 8;
 
 // 実働日数
-workedDays = ~~infotplRow[6].getElementsByTagName('td')[0].innerText;
+workedDays = ~~infotplRow[6].getElementsByTagName("td")[0].innerText;
 
 // 実労働時間
-var tmpWorked = infotplRow[13].getElementsByTagName('td')[0].innerText,
-  tmpWorkedHours = ~~tmpWorked.split(':')[0],
-  tmpWorkedMinutes = ~~tmpWorked.split(':')[1];
-workedHours = tmpWorkedHours + (tmpWorkedMinutes / 60);
+var tmpWorked = infotplRow[13].getElementsByTagName("td")[0].innerText,
+  tmpWorkedHours = ~~tmpWorked.split(":")[0],
+  tmpWorkedMinutes = ~~tmpWorked.split(":")[1];
+workedHours = tmpWorkedHours + tmpWorkedMinutes / 60;
 
 // 有給休暇消化日数
-var tmpSalariedDays = 0, tmpSalariedHarfDaysAm = 0, tmpSalariedHarfDaysPm = 0;
+var tmpSalariedDays = 0,
+  tmpSalariedHarfDaysAm = 0,
+  tmpSalariedHarfDaysPm = 0;
 var thText;
 // 後ろから３カラム分のデータ（があるかもしれない）
-for (i = 1; i < 4; i++) {
+for (let i = 1; i < 4; i++) {
   // ht の無いカラムは無いはずだが念のため
-  if (infotplRow[rowLength-i].getElementsByTagName('th')) {
-    thText = infotplRow[rowLength-i].getElementsByTagName('th')[0].innerText;
+  if (infotplRow[rowLength - i].getElementsByTagName("th")) {
+    thText = infotplRow[rowLength - i].getElementsByTagName("th")[0].innerText;
   } else {
     thText = null;
   }
   // th の値によって判断する
   switch (thText) {
-    case '有休(全休)':
-      tmpSalariedDays = infotplRow[rowLength-i].getElementsByTagName('td')[0].innerText * 1;
+    case "有休(全休)":
+      tmpSalariedDays = ~~infotplRow[rowLength - i].getElementsByTagName(
+        "td"
+      )[0].innerText;
       break;
-    case '有休(AM休)':
-      tmpSalariedHarfDaysAm = infotplRow[rowLength-i].getElementsByTagName('td')[0].innerText * 1;
+    case "有休(AM休)":
+      tmpSalariedHarfDaysAm = ~~infotplRow[rowLength - i].getElementsByTagName(
+        "td"
+      )[0].innerText;
       break;
-    case '有休(PM休)':
-      tmpSalariedHarfDaysPm = infotplRow[rowLength-i].getElementsByTagName('td')[0].innerText * 1;
+    case "有休(PM休)":
+      tmpSalariedHarfDaysPm = ~~infotplRow[rowLength - i].getElementsByTagName(
+        "td"
+      )[0].innerText;
       break;
     default:
       break;
@@ -64,11 +76,11 @@ remainWorkDays = stdWorkDays - (workedDays + salariedDays);
 
 // 給与労働時間
 // 実労働時間に有給休暇（1 day = 8 hours とする）分の労働時間を足したもの
-excessWorkTimes = workedHours + (salariedDays * 8);
+excessWorkTimes = workedHours + salariedDays * 8;
 
 // 何時間余裕があるか
 // 残りの出勤可能日全て 8 時間労働すると仮定したときの猶予時間数
-workTimeMargin = excessWorkTimes - (stdWorkHours - (remainWorkDays * 8));
+workTimeMargin = excessWorkTimes - (stdWorkHours - remainWorkDays * 8);
 
 // 1日あたり何時間働けばいいか
 // 所定労働時間から実質労働時間を引いた値を残りの出勤可能日数で割ったもの
@@ -97,21 +109,6 @@ console.log(
   lastUpdatedAt
 );
 
-/* localStorage は content_scripts と popup でコンテキストが別になるため使えない。
-localStorage.jwStdWorkDays = stdWorkDays;
-localStorage.jwStdWorkHours = stdWorkHours;
-localStorage.jwWorkedDays = workedDays;
-localStorage.jwWorkedHours = workedHours;
-localStorage.jwSalariedDays = salariedDays;
-localStorage.jwRemainWorkDays = remainWorkDays;
-localStorage.jwExcessWorkTimes = excessWorkTimes;
-localStorage.jwWorkTimeMargin = workTimeMargin;
-localStorage.jwRequiredWorkTimes = requiredWorkTimes;
-
-// DEBUG
-console.log("worktime.js save localStorage.");
-*/
-
 var jobcanWorktimes = {
   stdWorkDays: stdWorkDays,
   stdWorkHours: stdWorkHours,
@@ -123,8 +120,8 @@ var jobcanWorktimes = {
   workTimeMargin: workTimeMargin,
   requiredWorkTimes: requiredWorkTimes,
   lastUpdatedAt: lastUpdatedAt
-}
-chrome.storage.sync.set(jobcanWorktimes, function(){});
+};
+chrome.storage.sync.set(jobcanWorktimes, function() {});
 
 // DEBUG
 console.log("worktime.js save chrome.storage.sync.set()");
