@@ -1,45 +1,19 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta charset="utf-8">
-  <style>
-.notify, .notify a { color: #999; font-size: 90%; }
-  </style>
-</head>
-<body style="min-width:250px">
+  <head>
+    <meta charset="utf-8">
+    <style>
+      .notify, .notify a { color: #999; font-size: 90%; }
+    </style>
+  </head>
+  <body style="min-width:250px">
+    <div id="example"></div>
 
-<h3>Calculate Working Time</h3>
+    <!-- Dependencies -->
+    <script src="./node_modules/react/dist/react.js"></script>
+    <script src="./node_modules/react-dom/dist/react-dom.js"></script>
 
-<p class="notify">値の取得・更新をするためには <a href="https://ssl.jobcan.jp/employee/attendance" target="_blank" tabindex="-1">JOBCAN の出勤簿ページ</a> へのアクセスが必要です。</p>
-<p class="notify">JOBCAN で「勤務中」にデータ取得を行った場合、貯金が大きくマイナスになる場合があります。</p>
-
-<dl>
-  <hr>
-  <dt id="stdWorkDays">所定労働日数 <small>days</small></dt>
-  <dd></dd>
-  <dt id="stdWorkHours">所定労働時間 <small>hours</small></dt>
-  <dd></dd>
-  <hr>
-  <dt id="workedDays">実働日数 <small>days</small></dt>
-  <dd></dd>
-  <dt id="workedHours">実労働時間 <small>hours</small></dt>
-  <dd></dd>
-  <dt id="salariedDays">有給休暇消化日数 <small>days</small></dt>
-  <dd></dd>
-  <hr>
-  <dt id="remainWorkDays">今月の残り出勤可能日数 <small>days</small></dt>
-  <dd></dd>
-  <dt id="excessWorkTimes">給与労働時間 <small>hours</small></dt>
-  <dd></dd>
-  <dt id="workTimeMargin">何時間余裕があるか（貯金） <small>hours</small></dt>
-  <dd></dd>
-  <dt id="requiredWorkTimes">1日あたりの労働時間目安 <small>hours</small></dt>
-  <dd></dd>
-  <hr>
-  <dt id="lastUpdatedAt">最終更新日時</dt>
-  <dd></dd>
-</dl>
-
-<script src="js/popup.js"></script>
-</body>
+    <!-- Main -->
+    <script src="js/bundle.js"></script>
+  </body>
 </html>
