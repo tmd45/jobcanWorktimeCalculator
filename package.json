@@ -4,7 +4,7 @@
   "description": "",
   "license": "ISC",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack && tsc src/worktime.ts --outDir dist/js && tsc src/background.ts --outDir dist/js",
     "prettier": "prettier"
   },
   "devDependencies": {
