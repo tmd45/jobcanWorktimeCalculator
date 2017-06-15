@@ -2,6 +2,7 @@
  * Scraping Jobcan employee/attendance page.
  * ft. https://github.com/hanocha/how-many-work-time/blob/master/app/models/work_time_info.rb
  */
+
 var stdWorkDays,
   stdWorkHours,
   workedDays,
@@ -110,18 +111,18 @@ console.log(
 );
 
 var jobcanWorktimes = {
-  stdWorkDays: stdWorkDays,
-  stdWorkHours: stdWorkHours,
-  workedDays: workedDays,
-  workedHours: workedHours,
-  salariedDays: salariedDays,
-  remainWorkDays: remainWorkDays,
-  excessWorkTimes: excessWorkTimes,
-  workTimeMargin: workTimeMargin,
-  requiredWorkTimes: requiredWorkTimes,
-  lastUpdatedAt: lastUpdatedAt
+  state: {
+    stdWorkDays: stdWorkDays,
+    stdWorkHours: stdWorkHours,
+    workedDays: workedDays,
+    workedHours: workedHours,
+    salariedDays: salariedDays,
+    remainWorkDays: remainWorkDays,
+    excessWorkTimes: excessWorkTimes,
+    workTimeMargin: workTimeMargin,
+    requiredWorkTimes: requiredWorkTimes,
+    lastUpdatedAt: lastUpdatedAt
+  }
 };
-chrome.storage.sync.set(jobcanWorktimes, function() {});
 
-// DEBUG
-console.log("worktime.js save chrome.storage.sync.set()");
+chrome.storage.sync.set(jobcanWorktimes, function() {});
