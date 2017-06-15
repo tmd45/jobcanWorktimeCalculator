@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import Header from "./Header";
 import Notification from "./Notification";
-import DefinitionList from "./DefinitionList";
+import DefinitionList from "../containers/DefinitionList";
 
 const ContentContainer = styled.div`
   padding: 10px 10px;
